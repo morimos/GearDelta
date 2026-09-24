@@ -256,9 +256,9 @@ local function renderCase(view, multiple)
     tooltip:AddLine(L.current:format(view.oldNames), 0.75, 0.75, 0.75, true)
     tooltip:AddLine((view.together and L.together or L.proposed):format(view.newNames), 0.75, 0.75, 0.75, true)
     if #view.gain > 0 then
-        tooltip:AddLine(L.gain, 0.4, 0.9, 0.4)
+        tooltip:AddLine(L.gain, GREEN_FONT_COLOR:GetRGB())
         for _, entry in ipairs(view.gain) do
-            tooltip:AddLine(("+%s %s"):format(formatAmount(entry.amount), entry.label), 0.4, 0.9, 0.4)
+            tooltip:AddLine(("+%s %s"):format(formatAmount(entry.amount), entry.label), GREEN_FONT_COLOR:GetRGB())
         end
     end
     if #view.loss > 0 then
