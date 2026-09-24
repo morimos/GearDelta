@@ -233,6 +233,22 @@ local function prepareCase(case, index)
     }
 end
 
+local function formatAmount(amount)
+    local magnitude = math.abs(amount)
+    local formatted
+    if amount == math.floor(amount) then
+        formatted = ("%.0f"):format(amount)
+    elseif magnitude >= 0.1 then
+        formatted = ("%.1f"):format(amount)
+    else
+        formatted = ("%g"):format(amount)
+    end
+    if GetLocale() == "deDE" then
+        formatted = formatted:gsub("%.", ",")
+    end
+    return formatted
+end
+
 local function renderCase(view, multiple)
     if multiple then
         tooltip:AddLine(L.comparison:format(view.index), 1, 0.82, 0)
@@ -242,13 +258,13 @@ local function renderCase(view, multiple)
     if #view.gain > 0 then
         tooltip:AddLine(L.gain, 0.4, 0.9, 0.4)
         for _, entry in ipairs(view.gain) do
-            tooltip:AddLine(("+%g %s"):format(entry.amount, entry.label), 0.4, 0.9, 0.4)
+            tooltip:AddLine(("+%s %s"):format(formatAmount(entry.amount), entry.label), 0.4, 0.9, 0.4)
         end
     end
     if #view.loss > 0 then
         tooltip:AddLine(L.loss, 0.95, 0.45, 0.45)
         for _, entry in ipairs(view.loss) do
-            tooltip:AddLine(("%g %s"):format(entry.amount, entry.label), 0.95, 0.45, 0.45)
+            tooltip:AddLine(("%s %s"):format(formatAmount(entry.amount), entry.label), 0.95, 0.45, 0.45)
         end
     end
 end
