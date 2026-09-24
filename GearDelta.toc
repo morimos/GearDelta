@@ -1,0 +1,6 @@
+## Interface: 16001
+## Title: GearDelta
+## Notes: Shows item stat changes against currently equipped gear.
+## Version: 0.1.0
+
+GearDelta.lua
